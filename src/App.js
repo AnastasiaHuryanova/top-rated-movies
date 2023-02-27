@@ -8,13 +8,15 @@ import TopRatedMoviesList from "./components/TopRatedMoviesList";
 
 const App = () => {
   return (
-    <div className="App">
-      <Header></Header>
-      <Routes>
-        <Route exact path="/" element={<TopRatedMoviesList />} />
-        <Route path="/movie/:movieId" element={<MovieDetail />} />
-        <Route path="/favorites" element={<FavoriteMovies />} />
-      </Routes>
+    <div style={{display:"flex", justifyContent:"center"}}>
+      <div className="App" style={{ width: "60vw" }}>
+        <Header></Header>
+        <Routes>
+          <Route exact path="/" element={<TopRatedMoviesList />} />
+          <Route path="/movie/:movieId" element={<MovieDetail />} />
+          <Route path="/favorites" element={<FavoriteMovies />} />
+        </Routes>
+      </div>
     </div>
   );
 };
