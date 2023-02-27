@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useGetMovieDetailQuery } from "../redux/features/apiSlice";
@@ -17,9 +18,9 @@ const MovieDetail = ({ navigation, route }) => {
   const favorites = useSelector(selectFavorites);
   console.log(favorites);
 
-  /*   const [iconHeart, setIconHeart] = useState(
-    favorites.find((movie) => movie.id === id) ? faHeartSolid : faHeart
-  ); */
+  const [favorite, setFavorite] = useState(
+    favorites.find((movie) => movie.id === movieId) ? true : false
+  );
 
   const { data: movie, isLoading } = useGetMovieDetailQuery(movieId);
 
@@ -72,22 +73,27 @@ const MovieDetail = ({ navigation, route }) => {
     <div>
       <h1>{movie?.title}</h1>
       <h1>{movie?.overview}</h1>
-      <button
-        onClick={() => {
-          favoritesAdding();
-          console.log(favorites);
-        }}
-      >
-        add to favorites
-      </button>
-      <button
-        onClick={() => {
-          favoritesRemoving();
-          console.log(favorites);
-        }}
-      >
-        remove from favorites
-      </button>
+      {favorite === false ? (
+        <button
+          onClick={() => {
+            favoritesAdding();
+            setFavorite(true)
+            console.log(favorites);
+          }}
+        >
+          add to favorites
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            favoritesRemoving();
+            setFavorite(false)
+            console.log(favorites);
+          }}
+        >
+          remove from favorites
+        </button>
+      )}
     </div>
   );
 };
