@@ -5,9 +5,15 @@ import FavoriteMovies from "./components/FavoriteMovies";
 import Header from "./components/Header";
 import MovieDetail from "./components/MovieDetail";
 import TopRatedMoviesList from "./components/TopRatedMoviesList";
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material/styles";
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
+
 
 const App = () => {
   return (
+    <ThemeProvider theme={theme}>
     <div style={{display:"flex", justifyContent:"center"}}>
       <div className="App" style={{ width: "60vw" }}>
         <Header></Header>
@@ -18,6 +24,7 @@ const App = () => {
         </Routes>
       </div>
     </div>
+    </ThemeProvider>
   );
 };
 

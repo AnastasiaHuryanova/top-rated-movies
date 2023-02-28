@@ -1,3 +1,4 @@
+import { Box, Card, Typography } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -7,6 +8,8 @@ import {
   removeFavoriteByMovieId,
   selectFavorites,
 } from "../redux/features/favoriteMoviesSlice";
+import StarIcon from "@mui/icons-material/Star";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 
 const TMDB_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -23,6 +26,7 @@ const MovieDetail = ({ navigation, route }) => {
   );
 
   const { data: movie, isLoading } = useGetMovieDetailQuery(movieId);
+  console.log(movie)
 
   const favoritesAdding = () => {
     if (favorites.filter((film) => film.id !== movie.id)) {
@@ -70,31 +74,49 @@ const MovieDetail = ({ navigation, route }) => {
   //if (isLoading) return null;
 
   return (
-    <div>
-      <h1>{movie?.title}</h1>
-      <h1>{movie?.overview}</h1>
-      {favorite === false ? (
-        <button
-          onClick={() => {
-            favoritesAdding();
-            setFavorite(true)
-            console.log(favorites);
-          }}
-        >
-          add to favorites
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            favoritesRemoving();
-            setFavorite(false)
-            console.log(favorites);
-          }}
-        >
-          remove from favorites
-        </button>
-      )}
-    </div>
+    <Box sx={{display:"flex"}}>
+      <Card></Card>
+      <img src={TMDB_URL + movie?.poster_path}></img>
+      <Box>
+        <Typography>{movie?.title}</Typography>
+        <Typography sx={{ fontSize: "1rem" }}>
+          <StarIcon style={{ fontSize: "1rem", color: "orange" }} />
+          {movie?.vote_average}
+        </Typography>
+        <Typography sx={{ fontSize: "1rem" }}>
+          <CalendarTodayOutlinedIcon
+            style={{
+              fontSize: "1rem",
+              backgroundColor: "orange",
+              color: "white",
+            }}
+          />
+          {movie?.release_date}
+        </Typography>
+        <Typography>{movie?.overview}</Typography>
+        {favorite === false ? (
+          <button
+            onClick={() => {
+              favoritesAdding();
+              setFavorite(true);
+              console.log(favorites);
+            }}
+          >
+            add to favorites
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              favoritesRemoving();
+              setFavorite(false);
+              console.log(favorites);
+            }}
+          >
+            remove from favorites
+          </button>
+        )}
+      </Box>
+    </Box>
   );
 };
 

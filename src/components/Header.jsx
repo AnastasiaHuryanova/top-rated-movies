@@ -3,7 +3,7 @@ import { AppBar, Box, Typography } from "@mui/material";
 
 const Header = () => {
   return (
-    <Box sx={{ display: "flex", fontSize: "1.5rem", padding:"1rem"}}>
+    <Box sx={{ display: "flex", fontSize: "1.5rem", padding:"1rem", width:"55vw"}}>
       <AppBar
         position="static"
         color="transparent"
@@ -14,12 +14,12 @@ const Header = () => {
           justifyContent: "space-between",
         }}
       >
-        <Typography style={{ fontSize: "2rem" }}>FavMovies</Typography>
+        <Typography variant="h3">FavMovies</Typography>
         <Box>
-          <Link to="/" style={{ textDecoration: "none", margin: "5rem"}}>
+          <Link to="/" style={{ textDecoration: "none"}}>
             Top Rated
           </Link>
-          <Link to="/favorites" style={{ textDecoration: "none" }}>
+          <Link to="/favorites" style={{ textDecoration: "none", margin:"1.5rem" }}>
             Favorites
           </Link>
         </Box>
