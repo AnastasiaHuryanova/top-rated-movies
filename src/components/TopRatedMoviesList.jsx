@@ -35,7 +35,7 @@ const TopRatedMoviesList = () => {
         id: movie.id,
         image: TMDB_URL + movie.poster_path,
         year: movie.release_date.slice(0, 4),
-        rating: movie.vote_average,
+        rating: movie.vote_average.toFixed(1),
       };
     });
 

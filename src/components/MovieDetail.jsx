@@ -81,7 +81,7 @@ const MovieDetail = ({ navigation, route }) => {
         <Typography>{movie?.title}</Typography>
         <Typography sx={{ fontSize: "1rem" }}>
           <StarIcon style={{ fontSize: "1rem", color: "orange" }} />
-          {movie?.vote_average}
+          {movie?.vote_average.toFixed(1)}
         </Typography>
         <Typography sx={{ fontSize: "1rem" }}>
           <CalendarTodayOutlinedIcon

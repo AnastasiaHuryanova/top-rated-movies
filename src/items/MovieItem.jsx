@@ -56,9 +56,9 @@ const MovieItem = ({movie}) => {
               <Zoom in={show}>
                 <CardMedia
                   sx={{
-                    height: "75%",
-                    width: "83%",
-                    borderRadius: 3,
+                    height: "20rem",
+                    width: "12rem",
+                    borderRadius: "2rem",
                     position: "absolute",
                     backgroundColor: "rgba(0, 0, 0, 0.70)",
                   }}
@@ -70,7 +70,7 @@ const MovieItem = ({movie}) => {
                   position: "absolute",
                   color: "whitesmoke",
                   display: "flex",
-                  bottom: "5rem",
+                  bottom: "8rem",
                   justifyContent: "space-between",
                   width: "10rem",
                 }}
@@ -88,10 +88,9 @@ const MovieItem = ({movie}) => {
 
           <CardMedia
             sx={{
-              height: "80%",
-              width: "100%",
-              borderRadius: 3,
-              objectFit: "contain",
+              height: "20rem",
+              width: "12rem",
+              borderRadius: "2rem",
             }}
             image={movie.image}
             title={movie.title}
