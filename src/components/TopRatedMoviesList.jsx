@@ -8,7 +8,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useGetTopRatedMoviesQuery } from "../redux/features/apiSlice";
@@ -32,8 +32,11 @@ const TopRatedMoviesList = () => {
 
   const { data: fetchedMovies } = useGetTopRatedMoviesQuery(page);
 
+  const previousValues = useRef({ page, fetchedMovies });
+
   useEffect(() => {
-    if (!fetchedMovies) return;
+    if (!fetchedMovies || (previousValues.current.page === page &&
+        previousValues.current.fetchedMovies === fetchedMovies)) return;
     const mappedFetchedMovies = fetchedMovies.results.map((movie) => {
       return {
         title: movie.title,
@@ -133,7 +136,7 @@ const TopRatedMoviesList = () => {
                   title={movie?.title}
                 />
                 <CardContent>
-                  <Typography sx={{text}}>{movie?.title}</Typography>
+                  <Typography>{movie?.title}</Typography>
                 </CardContent>
               </Card>
             </Link>
