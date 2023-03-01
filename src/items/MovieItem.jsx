@@ -1,3 +1,4 @@
+import StarIcon from "@mui/icons-material/Star";
 import {
   Box,
   Card,
@@ -7,14 +8,12 @@ import {
   Typography,
   Zoom,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import StarIcon from "@mui/icons-material/Star";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MovieItem = ({ movie }) => {
   const [show, setShow] = useState(false);
   const [hoveredId, setHoveredId] = useState("");
-  console.log(movie);
 
   const hoverId = (id) => {
     setHoveredId(id);
@@ -69,6 +68,7 @@ const MovieItem = ({ movie }) => {
                     boxShadow: "0px 0px 10px 10px rgba(0, 0, 0, 0.70)",
                   }}
                   title={movie.title}
+                  image={""}
                 />
               </Zoom>
               <CardContent
@@ -120,7 +120,7 @@ const MovieItem = ({ movie }) => {
                 fontSize: "1rem",
                 textAlign: "center",
                 fontWeight: "600",
-                lineHeight:"1"
+                lineHeight: "1",
               }}
             >
               {movie.title}

@@ -9,14 +9,13 @@ const favoritesSlice = createSlice({
   },
   reducers: {
     addFavoriteMovie: (state, action) => {
-      console.log(state);
       const movie = action.payload;
       const mappedMovie = {
-        title: movie.title,
         id: movie.id,
+        title: movie.title,
         image: TMDB_URL + movie.poster_path,
         year: movie.release_date.slice(0, 4),
-        rating: movie.vote_average,
+        rating: movie.vote_average.toFixed(1),
       };
       state.favorites = [...state.favorites, mappedMovie];
     },
@@ -33,4 +32,5 @@ const favoritesSlice = createSlice({
 export const { addFavoriteMovie, removeFavoriteByMovieId } =
   favoritesSlice.actions;
 export const selectFavorites = (state) => state.favorites.favorites;
+
 export default favoritesSlice.reducer;

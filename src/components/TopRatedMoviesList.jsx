@@ -42,7 +42,7 @@ const TopRatedMoviesList = () => {
     page === 1
       ? dispatch(moviesSetting(mappedFetchedMovies))
       : dispatch(concatMovies(mappedFetchedMovies));
-  }, [fetchedMovies, page, dispatch]);
+  }, [page, fetchedMovies]);
 
   return (
     <Box>

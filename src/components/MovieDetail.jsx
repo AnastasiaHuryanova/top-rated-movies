@@ -1,3 +1,5 @@
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import StarIcon from "@mui/icons-material/Star";
 import {
   Box,
   Button,
@@ -6,7 +8,6 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useGetMovieDetailQuery } from "../redux/features/apiSlice";
@@ -15,36 +16,23 @@ import {
   removeFavoriteByMovieId,
   selectFavorites,
 } from "../redux/features/favoriteMoviesSlice";
-import StarIcon from "@mui/icons-material/Star";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 
 const TMDB_URL = "https://image.tmdb.org/t/p/w500";
 
 const MovieDetail = () => {
   const { movieId } = useParams();
-  console.log(movieId);
 
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
-  console.log(favorites);
-
-  const [favorite, setFavorite] = useState(
-    favorites.find((movie) => movie.id === movieId) ? true : false
-  );
-
   const { data: movie, isLoading } = useGetMovieDetailQuery(movieId);
-  console.log(movie);
 
-  const favoritesAdding = () => {
-    if (favorites.filter((film) => film.id !== movie.id)) {
-      dispatch(addFavoriteMovie(movie));
-    }
-  };
 
-  const favoritesRemoving = () => {
-    if (favorites.filter((film) => film.id === movie.id)) {
-      console.log("bau");
+  const favoritesHandling = (movie) => {
+    console.log(favorites.some((film) => film.id === movie.id));
+    if (favorites.some((film) => film.id === movie.id)) {
       dispatch(removeFavoriteByMovieId(movie.id));
+    } else {
+      dispatch(addFavoriteMovie(movie));
     }
   };
 
@@ -58,7 +46,7 @@ const MovieDetail = () => {
             sx={{
               flexBasis: "60%",
               padding: "1em 1em 0 1em",
-              backgroundSize:"cover"
+              backgroundSize: "cover",
             }}
           />
           <CardContent
@@ -102,45 +90,30 @@ const MovieDetail = () => {
                 margin: "3rem",
               }}
             >
-              {favorite === false ? (
-                <Button
-                  variant="contained"
-                  color="warning"
-                  sx={{
-                    borderRadius: "2rem",
-                    textTransform: "none",
-                    color: "white",
-                    fontWeight: "500",
-                    justifyContent: "center",
-                  }}
-                  onClick={() => {
-                    favoritesAdding();
-                    setFavorite(true);
-                    console.log(favorites);
-                  }}
-                >
-                  <Typography>Add To Favorites</Typography>
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  color="error"
-                  sx={{
-                    borderRadius: "2rem",
-                    textTransform: "none",
-                    color: "white",
-                    fontWeight: "500",
-                    justifyContent: "center",
-                  }}
-                  onClick={() => {
-                    favoritesRemoving();
-                    setFavorite(false);
-                    console.log(favorites);
-                  }}
-                >
-                  <Typography> Remove From Favorites</Typography>
-                </Button>
-              )}
+              <Button
+                variant="contained"
+                color={
+                  favorites.some((film) => film.id === movie.id)
+                    ? "error"
+                    : "warning"
+                }
+                sx={{
+                  borderRadius: "2rem",
+                  textTransform: "none",
+                  color: "white",
+                  fontWeight: "500",
+                  justifyContent: "center",
+                }}
+                onClick={() => {
+                  favoritesHandling(movie);
+                }}
+              >
+                <Typography>
+                  {favorites.some(film => film.id === movie.id)
+                    ? "Remove From Favorites"
+                    : "Add To Favorites"}
+                </Typography>
+              </Button>
             </Box>
           </CardContent>
         </Card>
