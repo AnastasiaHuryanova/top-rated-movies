@@ -26,7 +26,7 @@ const TopRatedMoviesList = () => {
     if (
       !fetchedMovies ||
       (previousValues.current.page === page &&
-        previousValues.current.fetchedMovies)
+        previousValues.current.fetchedMovies === fetchedMovies)
     )
       return;
     const mappedFetchedMovies = fetchedMovies.results.map((movie) => {
@@ -42,31 +42,30 @@ const TopRatedMoviesList = () => {
     page === 1
       ? dispatch(moviesSetting(mappedFetchedMovies))
       : dispatch(concatMovies(mappedFetchedMovies));
-  }, [fetchedMovies, page]);
+  }, [fetchedMovies, page, dispatch]);
 
   return (
     <Box>
-      <Grid container spacing={4}>
+      <Grid container spacing={1}>
         {isSuccess &&
           movies?.map((movie) => <MovieItem key={movie.id} movie={movie} />)}
       </Grid>
-      <Box sx={{ display: "flex", width: "50wv", justifyContent: "center" }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Button
           sx={{
             borderRadius: "2rem",
-            bgcolor: "grey",
             textTransform: "none",
             color: "black",
-            padding: "1rem",
-            fontWeight: "500",
+            backgroundColor:"#f2f2f2",
+            border:"solid 0.01rem #ccc",
+            padding: "0.5rem 2rem",
             margin: 6,
-            justifyContent: "center",
           }}
           onClick={() => {
             dispatch(nextPage());
           }}
         >
-          <Typography>Load more</Typography>
+          <Typography sx={{fontWeight:"700"}}>Load More</Typography>
         </Button>
       </Box>
     </Box>
