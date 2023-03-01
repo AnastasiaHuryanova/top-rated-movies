@@ -23,10 +23,10 @@ const TopRatedMoviesList = () => {
   const previousValues = useRef({ page, fetchedMovies });
 
   useEffect(() => {
+    console.log(previousValues);
     if (
       !fetchedMovies ||
-      (previousValues.current.page === page &&
-        previousValues.current.fetchedMovies === fetchedMovies)
+      previousValues.current.fetchedMovies === fetchedMovies
     )
       return;
     const mappedFetchedMovies = fetchedMovies.results.map((movie) => {
@@ -38,12 +38,12 @@ const TopRatedMoviesList = () => {
         rating: movie.vote_average.toFixed(1),
       };
     });
-
+    console.log("qualcosa");
     page === 1
       ? dispatch(moviesSetting(mappedFetchedMovies))
       : dispatch(concatMovies(mappedFetchedMovies));
-  }, [page, fetchedMovies]);
-
+  }, [page, dispatch]);
+  console.log(page);
   return (
     <Box>
       <Grid container spacing={1}>
