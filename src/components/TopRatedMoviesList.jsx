@@ -56,8 +56,8 @@ const TopRatedMoviesList = () => {
             borderRadius: "2rem",
             textTransform: "none",
             color: "black",
-            backgroundColor:"#f2f2f2",
-            border:"solid 0.01rem #ccc",
+            backgroundColor: "#f2f2f2",
+            border: "solid 0.01rem #ccc",
             padding: "0.5rem 2rem",
             margin: 6,
           }}
@@ -65,7 +65,7 @@ const TopRatedMoviesList = () => {
             dispatch(nextPage());
           }}
         >
-          <Typography sx={{fontWeight:"700"}}>Load More</Typography>
+          <Typography sx={{ fontWeight: "700" }}>Load More</Typography>
         </Button>
       </Box>
     </Box>
